@@ -52,17 +52,25 @@ $hargaSatuan = 50000;
 
     <section id="bus_kls">
         <div class="container mx-auto py-5 h-100">
+
             <div class="card my-5">
                 <div class="card-header">
                     <h3>STANDART</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body align-items-centered">
                     <blockquote class="blockquote mb-0">
-                        <p>A well-known quote, contained in a blockquote element.</p>
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 mt-2">
+                            <div class="card" style="width: 18rem;">
+                                <img src="img/standart.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
                             <button class="btn btn-primary" type="button"
                                 style="background-color : #17055B!important;"><a class="linka" href="index.php">Pesan
                                     Sekarang</a></button>
+                        </div>
                     </blockquote>
                 </div>
             </div>
@@ -72,8 +80,14 @@ $hargaSatuan = 50000;
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>A well-known quote, contained in a blockquote element.</p>
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 mt-2">
+                            <div class="card" style="width: 18rem;">
+                                <img src="img/duluxe.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
                             <button class="btn btn-primary" type="button"
                                 style="background-color : #17055B!important;"><a class="linka" href="index.php">Pesan
                                     Sekarang</a></button>
@@ -87,16 +101,21 @@ $hargaSatuan = 50000;
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>A well-known quote, contained in a blockquote element.</p>
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 mt-2">
+                            <div class="card" style="width: 18rem;">
+                                <img src="img/eksekutif.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
                             <button class="btn btn-primary" type="button"
-                                style="background-color : #17055B!important;"><a href="index.php" class="linka">Pesan
+                                style="background-color : #17055B!important;"><a class="linka" href="index.php">Pesan
                                     Sekarang</a></button>
                         </div>
                     </blockquote>
                 </div>
             </div>
-        </div>
     </section>
 </div>
 <!-- footer -->
