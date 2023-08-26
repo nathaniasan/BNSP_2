@@ -65,7 +65,9 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
         <div class="row py-2">
             <!-- Masukan data nama pelanggan. Tipe data text. -->
             <div class="col-sm-2"><label for="nik">Nomor Identitas (NIK):</label></div>
-            <div class="col-sm-6"><input required class="form-control" type="text" id="nik" name="nik"></div>
+            <!-- minimal 16 digit -->
+            <div class="col-sm-6"><input required class="form-control" type="text" id="nik" name="nik" minlength="16">
+            </div>
         </div>
         <div class="row py-2">
             <!-- Masukan pilihan lokasi kelas resto. -->
@@ -112,18 +114,14 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
         </div>
 
         <div class="row py-2">
-            <!-- Masukan data nama pelanggan. Tipe data text. -->
             <div class="col-sm-2"><label for="total_bayar">Jumlah Total Bayar : </label></div>
             <div class="col-sm-6"><input required readonly class="form-control" type="number" id="total_bayar"
                     name="total_bayar"></div>
         </div>
-
+        <!-- tombol -tombol -->
         <div class="col py-2">
-            <!-- Tombol Submit -->
             <div class="d-flex col-sm-8 justify-content-between">
-                <button class="btn btn-custom-width btn-secondary" type="submit" value="hitung" name="hitung">Hitung
-                    Total
-                    Bayar</button>
+                <button class="btn btn-custom-width btn-secondary" type="button" id="hitung">Hitung Total Bayar</button>
                 <button class="btn btn-custom-width btn-primary" type="submit" value="Pesan" name="Pesan">Pesan
                     Tiket</button>
                 <button class="btn btn-custom-width btn-danger" type="submit" value="cancel"
@@ -157,6 +155,32 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
                 }
             });
         });
+        $('#hitung').click(function () {
+            // Menghitung biaya breakfast
+            var biayaBreakfast = ($('#breakfast').prop('checked')) ? 80000 : 0;
+
+            // Mengambil nilai harga dari input
+            var harga = parseInt($('#harga').val());
+
+            // Mengambil nilai durasi dari input
+            var durasi = parseInt($('#durasi').val());
+
+            // Mengambil nilai NIK dari input
+            var nik = $('#nik').val();
+
+            // Pemeriksaan panjang NIK
+            if (nik.length !== 16) {
+                alert('NIK harus memiliki 16 digit.');
+                return; // Menghentikan eksekusi jika NIK tidak valid
+            }
+
+            // Menghitung total bayar
+            var totalBayar = (harga * durasi) + biayaBreakfast;
+
+            // Menampilkan hasil pada input total_bayar
+            $('#total_bayar').val(totalBayar);
+
+        });
     });
 </script>
 
@@ -172,6 +196,7 @@ if (isset($_POST['Pesan'])) {
         'nik' => $_POST['nik'],
         'jadwal' => $_POST['jadwal'],
         'durasi' => $_POST['durasi'],
+        'total_bayar' => $_POST['total_bayar'],
     );
     // query mengakses kelas dari table kamar
     $kelas = $dataPesanan['kelas'];
@@ -224,11 +249,10 @@ if (isset($_POST['Pesan'])) {
 
     //	Instruksi Kerja Nomor 10.
     //	Menghitung diskon.
-    // $diskon = (1/100) * $tagihanAwal;
-    // if ($tagihanAwal >= 1000000) {
-    //     $diskon = $tagihanAwal * 0.1;
-    // }
-    $diskon = $tagihanLansia * 0.1;
+    if ($_POST['durasi'] > 3) {
+
+        $diskon = 0.1;
+    }
 
     //	Variabel $tagihanAkhir berisi nilai tagihan akhir yang didapat dari nilai tagihan awal dikurangi diskon.
 
@@ -284,7 +308,8 @@ if (isset($_POST['Pesan'])) {
 					<div class='row py-2'>
 						<!-- Menampilkan Total Bayar (setelah diskon). -->
 						<div class='col-lg-2'>Total Bayar</div>
-						<div class='col-sm-6'> : Rp" . number_format($tagihanAkhir, 0, ".", ".") . ",-</div>
+						<div class='col-sm-6'> : Rp" . $_POST['total_bayar'];
+    ",-</div>
 					</div>
 			</div>
 			";
