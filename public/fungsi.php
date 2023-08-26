@@ -4,14 +4,15 @@ function insertData($data)
     $kelas = $_POST['kelas'];
     $nama = $_POST['nama'];
     $nik = $_POST['nik'];
+    $jkl = $_POST['jkl'];
+    $kelas = $_POST['kelas'];
     $jadwal = $_POST['jadwal'];
-    $noHP = $_POST['noHP'];
-    $penumpang1 =$_POST['penumpang1'];
-    $penumpang2 = $_POST['penumpang2'];
+    $durasi = $_POST['durasi'];
+    $total_bayar = $_POST['total_bayar'];
 
     // Contoh: Simpan data ke database
     $conn = $GLOBALS['conn'];
-    $query = "INSERT INTO `pemesanan` (`id_pemesanan`, `nama`, `nik`, `no_hp`, `id_kelas`, `jadwal`, `penumpang1`, `penumpang2`) VALUES (NULL, '$nama', '$nik', '$noHP', '$kelas', '$jadwal', '$penumpang1', '$penumpang2');";
+    $query = "INSERT INTO `pemesanan` (`id_pemesanan`, `nama`, `nik`, `jkl`, `id_kamar`, `jadwal`, `durasi`, `id_diskon`, `total_bayar`) VALUES (NULL, '$nama', '$nik', '$jkl', '$kelas', '$jadwal', '$durasi', '1', '$total_bayar');;";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

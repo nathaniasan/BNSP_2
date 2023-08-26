@@ -171,7 +171,6 @@ if (isset($_POST['Pesan'])) {
         'jkl' => $_POST['jkl'],
         'nik' => $_POST['nik'],
         'jadwal' => $_POST['jadwal'],
-        'noHP' => $_POST['noHP'],
         'durasi' => $_POST['durasi'],
     );
     // query mengakses kelas dari table kamar
@@ -259,7 +258,7 @@ if (isset($_POST['Pesan'])) {
 					</div>
 					<div class='row py-2'>
 						<!-- Menampilkan nomor HP pelanggan. -->
-						<div class='col-lg-2'>Nomor HP</div>
+						<div class='col-lg-2'>Jenis Kelamin</div>
 						<div class='col-sm-6'>: " . $dataPesanan['jkl'] . "</div>
 					</div>
                     <div class='row py-2'>
@@ -270,11 +269,6 @@ if (isset($_POST['Pesan'])) {
 					<div class='row py-2'>
 						<!-- Menampilkan jumlah penumpang non lansia. -->
 						<div class='col-lg-2'>Jumlah Penumpang </div>
-						<div class='col-sm-6'> : " . $dataPesanan['durasi'] . " Hari</div>
-					</div>
-					<div class='row py-2'>
-						<!-- Menampilkan jumlah kotak pesanan. -->
-						<div class='col-lg-2'>Jumlah Penumpang Lansia</div>
 						<div class='col-sm-6'> : " . $dataPesanan['durasi'] . " Hari</div>
 					</div>
 					<div class='row py-2'>
