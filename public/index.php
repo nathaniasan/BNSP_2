@@ -185,7 +185,7 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
 </script>
 
 <?php
-//	Kode berikut dieksekusi setelah tombol Hitung ditekan.
+//	Kode berikut diksekusi setelah tombol Hitung ditekan.
 if (isset($_POST['Pesan'])) {
 
     //	Variabel $dataPesanan berisi data-data pemesanan dari form dalam bentuk array.
@@ -235,6 +235,7 @@ if (isset($_POST['Pesan'])) {
     } else {
         echo "query errorrrr" . $query;
     }
+    $tagihanAwal = $_POST['durasi'] * $_POST['harga'];
 
 
     //	Menginisiasi variabel $diskon dengan nilai awal 0.
@@ -250,7 +251,6 @@ if (isset($_POST['Pesan'])) {
     //	Variabel $tagihanAkhir berisi nilai tagihan akhir yang didapat dari nilai tagihan awal dikurangi diskon.
 
 
-    $tagihanAkhir = $tagihanAwal - $diskon;
 
     $kelasPenumpang = array(
         '1' => "Standart",
@@ -296,7 +296,7 @@ if (isset($_POST['Pesan'])) {
 					<div class='row py-2'>
 						<!-- Menampilkan tarif pemesanan. -->
 						<div class='col-lg-2'>Diskon</div>
-						<div class='col-sm-6'> : Rp" . number_format($diskon, 0, ".", ".") . ",-</div>
+						<div class='col-sm-6'> : " . $diskon . ",-</div>
 					</div>
 					<div class='row py-2'>
 						<!-- Menampilkan Total Bayar (setelah diskon). -->
