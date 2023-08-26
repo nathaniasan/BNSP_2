@@ -6,7 +6,7 @@ $response = array('success' => false);
 if (isset($_POST['kelas'])) {
     $kelas = $_POST['kelas'];
     // Query untuk mengambil harga dari tabel kelas_bus
-    $query = "SELECT harga FROM kelas_bus WHERE id_kelas = '$kelas';";
+    $query = "SELECT harga FROM kamar WHERE id_kamar = '$kelas';";
     $result = $conn->query($query);
 
     if ($result && $result->num_rows > 0) {

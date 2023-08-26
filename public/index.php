@@ -8,8 +8,6 @@ function hitung_tagihan_awal($harga, $jual)
 }
 // query mengakses kelas dari table kamar
 $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
-
-
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +39,7 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
     <h3 class="text-center">Form Pemesanan Kamar</h3>
     <!-- Instruksi Kerja Nomor 6. -->
     <!-- Menampilkan kelas bus restoran -->
-    <img class="img-fluid rounded-pill" src="img/bus1.png" style="width : 20%;" alt="logo">
+    <img class="img-fluid rounded-pill" src="img/hotel.jpg" style="width : 20%;" alt="logo">
 
     <!-- Form untuk memasukkan data pemesanan. -->
     <form action="" method="post" id="formPemesanan">
@@ -53,12 +51,12 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
         <div class="row py-2">
             <!-- Masukan data nama pelanggan. Tipe data text. -->
             <div class="col-sm-2"><label for="nama">Jenis Kelamin : </label></div>
-            <div class="col-sm-6"><input class="form-check-input" type="radio" value="laki_laki" name="laki_laki"
+            <div class="col-sm-6"><input class="form-check-input" type="radio" value="laki_laki" name="jkl"
                     id="laki_laki">
                 <label class="form-check-label" for="laki_laki">
                     Laki - Laki
                 </label>
-                <input class="form-check-input" type="radio" name="perempuan" value="perempuan" id="perempuan">
+                <input class="form-check-input" type="radio" name="jkl" value="perempuan" id="perempuan">
                 <label class="form-check-label" for="perempuan">
                     Perempuan
                 </label>
@@ -105,9 +103,9 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
         </div>
         <div class="row py-2">
             <!-- Masukan data nama pelanggan. Tipe data text. -->
-            <div class="col-sm-2"><label for="penumpang2">Termasuk Breakfast : </label></div>
-            <div class="col-sm-6"><input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
+            <div class="col-sm-2"><label for="breakfast">Termasuk Breakfast : </label></div>
+            <div class="col-sm-6"><input class="form-check-input" type="checkbox" value="1" id="breakfast">
+                <label class="form-check-label" for="breakfast">
                     Ya
                 </label>
             </div>
@@ -115,7 +113,7 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
 
         <div class="row py-2">
             <!-- Masukan data nama pelanggan. Tipe data text. -->
-            <div class="col-sm-2"><label for="total_bayar">Jumlah Total Bayar:</label></div>
+            <div class="col-sm-2"><label for="total_bayar">Jumlah Total Bayar : </label></div>
             <div class="col-sm-6"><input required readonly class="form-control" type="number" id="total_bayar"
                     name="total_bayar"></div>
         </div>
@@ -170,16 +168,16 @@ if (isset($_POST['Pesan'])) {
     $dataPesanan = array(
         'kelas' => $_POST['kelas'],
         'nama' => $_POST['nama'],
+        'jkl' => $_POST['jkl'],
         'nik' => $_POST['nik'],
         'jadwal' => $_POST['jadwal'],
         'noHP' => $_POST['noHP'],
-        'penumpang1' => $_POST['penumpang1'],
-        'penumpang2' => $_POST['penumpang2'],
+        'durasi' => $_POST['durasi'],
     );
     // query mengakses kelas dari table kamar
     $kelas = $dataPesanan['kelas'];
 
-    $query_harga = "SELECT harga FROM kamar WHERE id_kelas = '$kelas';";
+    $query_harga = "SELECT harga FROM kamar WHERE id_kamar = '$kelas';";
     $result = $conn->query($query_harga);
 
     $hargaSatuan = 0;
@@ -206,10 +204,10 @@ if (isset($_POST['Pesan'])) {
 
     //	Variabel $tagihanAwal berisi nilai tagihan awal (sebelum diskon) yang dihitung dengan menggunakan fungsi hitung_tagihan_awal().
 // menghitung total penumpang lansia dan non lansia 
-    echo $dataPesanan['penumpang2'] + $dataPesanan['penumpang1'];
+    echo $dataPesanan['durasi'] + $dataPesanan['durasi'];
     echo $hargaSatuan;
-    $tagihanAwal = hitung_tagihan_awal($dataPesanan['penumpang2'] + $dataPesanan['penumpang1'], $hargaSatuan);
-    $tagihanLansia = hitung_tagihan_awal($dataPesanan['penumpang2'], $hargaSatuan);
+    $tagihanAwal = hitung_tagihan_awal($dataPesanan['durasi'] + $dataPesanan['durasi'], $hargaSatuan);
+    $tagihanLansia = hitung_tagihan_awal($dataPesanan['durasi'], $hargaSatuan);
 
     // eksekusi akses database insert
     $berhasil = insertData($_POST);
@@ -239,8 +237,8 @@ if (isset($_POST['Pesan'])) {
     $tagihanAkhir = $tagihanAwal - $diskon;
 
     $kelasPenumpang = array(
-        '1' => "Ekonomi",
-        '2' => "Bisnis",
+        '1' => "Standart",
+        '2' => "Duluxe",
         '3' => "Eksekutif",
 
     );
@@ -262,7 +260,7 @@ if (isset($_POST['Pesan'])) {
 					<div class='row py-2'>
 						<!-- Menampilkan nomor HP pelanggan. -->
 						<div class='col-lg-2'>Nomor HP</div>
-						<div class='col-sm-6'>: " . $dataPesanan['noHP'] . "</div>
+						<div class='col-sm-6'>: " . $dataPesanan['jkl'] . "</div>
 					</div>
                     <div class='row py-2'>
 						<!-- Menampilkan lokasi kelas restoran. -->
@@ -272,12 +270,12 @@ if (isset($_POST['Pesan'])) {
 					<div class='row py-2'>
 						<!-- Menampilkan jumlah penumpang non lansia. -->
 						<div class='col-lg-2'>Jumlah Penumpang </div>
-						<div class='col-sm-6'> : " . $dataPesanan['penumpang1'] . " orang</div>
+						<div class='col-sm-6'> : " . $dataPesanan['durasi'] . " Hari</div>
 					</div>
 					<div class='row py-2'>
 						<!-- Menampilkan jumlah kotak pesanan. -->
 						<div class='col-lg-2'>Jumlah Penumpang Lansia</div>
-						<div class='col-sm-6'> : " . $dataPesanan['penumpang2'] . " orang</div>
+						<div class='col-sm-6'> : " . $dataPesanan['durasi'] . " Hari</div>
 					</div>
 					<div class='row py-2'>
 						<!-- Menampilkan tagihan awal (sebelum diskon). -->
