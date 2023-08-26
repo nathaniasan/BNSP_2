@@ -226,13 +226,6 @@ if (isset($_POST['Pesan'])) {
     //	Mengubah data pemesanan dalam format JSON ke dalam format array PHP.
     $dataPesanan = json_decode($dataJson, true);
 
-    //	Variabel $tagihanAwal berisi nilai tagihan awal (sebelum diskon) yang dihitung dengan menggunakan fungsi hitung_tagihan_awal().
-// menghitung total penumpang lansia dan non lansia 
-    echo $dataPesanan['durasi'] + $dataPesanan['durasi'];
-    echo $hargaSatuan;
-    $tagihanAwal = hitung_tagihan_awal($dataPesanan['durasi'] + $dataPesanan['durasi'], $hargaSatuan);
-    $tagihanLansia = hitung_tagihan_awal($dataPesanan['durasi'], $hargaSatuan);
-
     // eksekusi akses database insert
     $berhasil = insertData($_POST);
     // var_dump($_POST['aksi']);
