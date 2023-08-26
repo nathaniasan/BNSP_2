@@ -1,3 +1,24 @@
+<?php
+function hitung_tagihan_awal($harga, $jual)
+{
+    $tagihan = $harga * $jual;
+    return $tagihan;
+}
+
+//	Instruksi Kerja Nomor 2.
+//	Variabel $kelas berisi data kota lokasi kelas restoran dalam bentuk array.
+$kelas = array("Harmoni", "Sarinah", "Grogol", "Senayan", "Pluit", "Cempaka");
+
+//	Instruksi Kerja Nomor 3.
+//	Mengurutkan array $kelas sesuai abjad A-Z.
+sort($kelas);
+
+//	Instruksi Kerja Nomor 4.
+//	Variabel untuk menyimpan harga satuan nasi kotak.
+$hargaSatuan = 50000;
+?>
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,19 +33,97 @@
 <style>
     body {
         margin: 0px;
-        padding: 0px;
+        padding: 00px;
+    }
+
+    a {
+        text-decoration: none !important;
+        color: white;
+    }
+
+    .button.btn.btn-primary.linka {
+        color: white !important;
+        text-decoration: none;
     }
 </style>
 <!-- header -->
 <?php include 'header.php'; ?>
 <!-- main program -->
-<div class="container">
+<div class="container p-4 border">
+    <!-- Menampilkan judul halaman -->
 
+
+    <!-- kELAS bUS  -->
+
+    <section id="bus_kls">
+        <div class="container mx-auto py-5 h-100">
+
+            <div class="card my-5">
+                <div class="card-header">
+                    <h3>STANDART</h3>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <div class="d-flex flex-column align-items-center my-2">
+                            <div class="card" style="width: 24rem;">
+                                <img src="img/standart.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h4>Rp 500.000,-</h4>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mt-3" type="button"
+                                style="background-color: #17055B!important;"><a class="linka" href="index.php">Pesan
+                                    Sekarang</a></button>
+                        </div>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="card my-5">
+                <div class="card-header">
+                    <h3>DULUXE</h3>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <div class="d-flex flex-column align-items-center my-2">
+                            <div class="card" style="width: 24rem;">
+                                <img src="img/duluxe.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4>Rp 800.000,-</h4>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mt-3" type="button"
+                                style="background-color: #17055B!important;"><a class="linka" href="index.php">Pesan
+                                    Sekarang</a></button>
+                        </div>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="card my-5">
+                <div class="card-header">
+                    <h3>EKSEKUTIF</h3>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <div class="d-flex flex-column align-items-center my-2">
+                            <div class="card" style="width: 24rem;">
+                                <img src="img/eksekutif.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4>Rp 1.000.000,-</h4>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mt-3" type="button"
+                                style="background-color: #17055B!important;"><a class="linka" href="index.php">Pesan
+                                    Sekarang</a></button>
+                        </div>
+                    </blockquote>
+                </div>
+            </div>
+    </section>
 </div>
-
 <!-- footer -->
+
 <?php include 'footer.php'; ?>
-<!-- main form DaftarBeasiswa  -->
+
 <!-- js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
