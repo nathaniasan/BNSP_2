@@ -243,7 +243,7 @@ if (isset($_POST['Pesan'])) {
 
     //	Instruksi Kerja Nomor 10.
     //	Menghitung diskon.
-    if ($_POST['durasi'] > 3) {
+    if ($_POST['durasi'] >= 3) {
 
         $diskon = 0.1;
     }
@@ -260,6 +260,7 @@ if (isset($_POST['Pesan'])) {
     );
     $kelasLabel = $kelasPenumpang[$dataPesanan['kelas']];
     //	Menampilkan data pemesanan dan hasil perhitungan diskon dan tagihan.
+    $total_diskon = $diskon * 100;
     echo "
 				<br/>
 				<div class='container ph-4'>
@@ -296,7 +297,7 @@ if (isset($_POST['Pesan'])) {
 					<div class='row py-2'>
 						<!-- Menampilkan tarif pemesanan. -->
 						<div class='col-lg-2'>Diskon</div>
-						<div class='col-sm-6'> : " . $diskon . ",-</div>
+						<div class='col-sm-6'> : " . $total_diskon . "%</div>
 					</div>
 					<div class='row py-2'>
 						<!-- Menampilkan Total Bayar (setelah diskon). -->
@@ -308,9 +309,9 @@ if (isset($_POST['Pesan'])) {
 			";
 }
 ?>
+</section>
 <!-- footer -->
 <?php include 'footer.php'; ?>
-</section>
 <!-- main form DaftarBeasiswa  -->
 <!-- js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
