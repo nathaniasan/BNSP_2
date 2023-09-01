@@ -133,6 +133,8 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
 <!-- ajax validation harga -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+
+
 <!-- ajax validasi  -->
 <script>
     $(document).ready(function () {
@@ -157,6 +159,7 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
         });
         $('#hitung').click(function () {
             // Menghitung biaya breakfast
+            let diskon = 0;
             var biayaBreakfast = ($('#breakfast').prop('checked')) ? 80000 : 0;
 
             // Mengambil nilai harga dari input
@@ -173,9 +176,13 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
                 alert('NIK harus memiliki 16 digit.');
                 return; // Menghentikan eksekusi jika NIK tidak valid
             }
-
-            // Menghitung total bayar
             var totalBayar = (harga * durasi) + biayaBreakfast;
+
+            if (durasi > 3) {
+                diskon = 0.1;
+                totalBayar = totalBayar - (totalBayar * diskon);
+            }
+            // Menghitung total bayar
 
             // Menampilkan hasil pada input total_bayar
             $('#total_bayar').val(totalBayar);
