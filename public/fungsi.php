@@ -9,10 +9,11 @@ function insertData($data)
     $jadwal = $_POST['jadwal'];
     $durasi = $_POST['durasi'];
     $total_bayar = $_POST['total_bayar'];
+    $email = $_POST['email'];
 
     // Contoh: Simpan data ke database
     $conn = $GLOBALS['conn'];
-    $query = "INSERT INTO `pemesanan` (`id_pemesanan`, `nama`, `nik`, `jkl`, `id_kamar`, `jadwal`, `durasi`, `id_diskon`, `total_bayar`) VALUES (NULL, '$nama', '$nik', '$jkl', '$kelas', '$jadwal', '$durasi', '1', '$total_bayar');;";
+    $query = "INSERT INTO `pemesanan` (`id_pemesanan`, `nama`, `nik`, `email`,`jkl`, `id_kamar`, `jadwal`, `durasi`, `id_diskon`, `total_bayar`) VALUES (NULL, '$nama', '$nik','$email', '$jkl', '$kelas', '$jadwal', '$durasi', '1', '$total_bayar');;";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

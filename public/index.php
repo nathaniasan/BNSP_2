@@ -51,7 +51,7 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
         <div class="row py-2">
             <!-- Masukan data nama pelanggan. Tipe data text. -->
             <div class="col-sm-2"><label for="nama">Jenis Kelamin : </label></div>
-            <div class="col-sm-6"><input class="form-check-input" type="radio" value="laki_laki" name="jkl"
+            <div class="col-sm-6"><input class="form-check-input" type="radio" value="laki_laki" required name="jkl"
                     id="laki_laki">
                 <label class="form-check-label" for="laki_laki">
                     Laki - Laki
@@ -67,6 +67,13 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
             <div class="col-sm-2"><label for="nik">Nomor Identitas (NIK):</label></div>
             <!-- minimal 16 digit -->
             <div class="col-sm-6"><input required class="form-control" type="text" id="nik" name="nik" minlength="16">
+            </div>
+        </div>
+        <div class="row py-2">
+            <!-- Masukan data nama pelanggan. Tipe data text. -->
+            <div class="col-sm-2"><label for="Email">Alamat Email :</label></div>
+            <!-- minimal 16 digit -->
+            <div class="col-sm-6"><input required class="form-control" type="text" id="email" name="email" type="email">
             </div>
         </div>
         <div class="row py-2">
@@ -130,6 +137,7 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
         </div>
     </form>
 </div>
+
 <!-- ajax validation harga -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -157,6 +165,11 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
                 }
             });
         });
+        /*
+                dengan ketentuan:
+                • Jika lama menginap lebih dari 3 hari, maka discount 10 
+                • Jika piih breakfast, maka tambahan 80.000
+        */
         $('#hitung').click(function () {
             // Menghitung biaya breakfast
             let diskon = 0;
@@ -176,11 +189,11 @@ $query_kelas = mysqli_query($conn, "SELECT * FROM `kamar`;");
                 alert('NIK harus memiliki 16 digit.');
                 return; // Menghentikan eksekusi jika NIK tidak valid
             }
-            var totalBayar = (harga * durasi) + biayaBreakfast;
+            var totalBayar = (harga * durasi);
 
             if (durasi > 3) {
                 diskon = 0.1;
-                totalBayar = totalBayar - (totalBayar * diskon);
+                totalBayar = totalBayar - (totalBayar * diskon) + (biayaBreakfast * durasi);
             }
             // Menghitung total bayar
 
@@ -204,6 +217,7 @@ if (isset($_POST['Pesan'])) {
         'jadwal' => $_POST['jadwal'],
         'durasi' => $_POST['durasi'],
         'total_bayar' => $_POST['total_bayar'],
+        'email' => $_POST['email'],
     );
     // query mengakses kelas dari table kamar
     $kelas = $dataPesanan['kelas'];
@@ -282,6 +296,11 @@ if (isset($_POST['Pesan'])) {
 						<div class='col-sm-6'>:" . $dataPesanan['nik'] . "</div>
 					</div>
 					<div class='row py-2'>
+						<!-- Menampilkan nik pelanggan. -->
+						<div class='col-lg-2'>No Identitas</div>
+						<div class='col-sm-6'>:" . $dataPesanan['email'] . "</div>
+					</div>
+					<div class='row py-2'>
 						<!-- Menampilkan nomor HP pelanggan. -->
 						<div class='col-lg-2'>Jenis Kelamin</div>
 						<div class='col-sm-6'>: " . $dataPesanan['jkl'] . "</div>
@@ -318,7 +337,9 @@ if (isset($_POST['Pesan'])) {
 ?>
 </section>
 <!-- footer -->
-<?php include 'footer.php'; ?>
+<section>
+    <?php include 'footer.php'; ?>
+</section>
 <!-- main form DaftarBeasiswa  -->
 <!-- js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
